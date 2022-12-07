@@ -1,0 +1,16 @@
+{
+    "require": {
+        "smi2/phpclickhouse": "^1.3",
+        "binsuper/yaf-project-kernel": "^1.0",
+        "vlucas/phpdotenv": "^4.0",
+        "binsuper/phplib": "^0.8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        },
+        "files": [
+            "bootstrap/function.php"
+        ]
+    }
+}
