@@ -9,7 +9,7 @@ use App\Common\Signature\SignatureFactory;
 use App\Services\SignatureServices;
 use Gino\Yaf\Kernel\Log;
 use Closure;
-use Yaf\Request_Abstract;
+use Gino\Yaf\Kernel\Request;
 
 class VerifySignExample extends AbstractMiddleware {
 
@@ -21,11 +21,11 @@ class VerifySignExample extends AbstractMiddleware {
     }
 
     /**
-     * @param Request_Abstract $request
+     * @param Request $request
      * @param Closure $next
      * @return void
      */
-    public function handler(Request_Abstract $request, Closure $next) {
+    public function handler(Request $request, Closure $next) {
         $this->logger->debug('run example middleware');
 
         if (SignatureServices::isEnable()) {
