@@ -34,7 +34,6 @@ trait Response {
             'data'    => $data
         ];
         App::response()
-           ->setCode(\Gino\Yaf\Kernel\Response::S200_OK)
            ->setBody(json_encode($data, JSON_UNESCAPED_UNICODE) ?: '');
     }
 

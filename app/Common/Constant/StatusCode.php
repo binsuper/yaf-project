@@ -7,9 +7,9 @@ namespace App\Common\Constant;
  */
 class StatusCode {
 
-    const UNKNOWN_EXCEPTION = -1;                                   // 未知异常
-    const SUCCESS           = 0;                                    // 成功
-    const FAILED            = 1;                                    // 失败
+    const EXCEPTION = -1;                                   // 未知异常
+    const SUCCESS   = 0;                                    // 成功
+    const FAILED    = 1;                                    // 失败
 
     // 1 校验层
     const TIME_EXPIRED     = 1000;                           // 时间过期

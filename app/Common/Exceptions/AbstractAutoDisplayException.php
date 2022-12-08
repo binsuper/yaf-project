@@ -16,7 +16,7 @@ abstract class AbstractAutoDisplayException extends Exception {
     /**
      * @inheritDoc
      */
-    public function display() {
+    public function render() {
         $this->respJson(null, $this->getCode(), $this->getMessage());
     }
 
