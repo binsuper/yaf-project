@@ -1,11 +1,9 @@
 <?php
 
-use \Gino\Yaf\Kernel\Router\RouteCollector;
+use \Gino\Yaf\Kernel\Router\RouteManager as Route;
 
 
-return [(function (RouteCollector $route) {
+Route::middleware('example')->get('example', 'example@index@index');
 
-    // 监测链接回调
-    $route->middleware('example')->get('example', 'example@index@index');
 
-})];
+return Route::result();
