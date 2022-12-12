@@ -33,8 +33,7 @@ trait Response {
             'message' => $message,
             'data'    => $data
         ];
-        App::response()
-           ->setBody(json_encode($data, JSON_UNESCAPED_UNICODE) ?: '');
+        App::response()->setBody(json_encode($data, JSON_UNESCAPED_UNICODE) ?: '');
     }
 
 }
