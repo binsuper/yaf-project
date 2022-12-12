@@ -5,9 +5,9 @@ namespace App\Common\Exceptions;
 use App\Common\Constant\StatusCode;
 use App\Common\Constant\Utterance;
 use App\Common\Traits\Response as ResponseTrait;
+use App\Common\Middleware\AccessLog;
 use Gino\Yaf\Kernel\App;
 use \Gino\Yaf\Kernel\Exception\ErrorHandler as KernelErrorHandler;
-use Gino\Yaf\Kernel\Exception\MiddlewareBreakOff;
 use Gino\Yaf\Kernel\Log;
 use \Gino\Yaf\Kernel\Response;
 
@@ -33,9 +33,11 @@ class ErrorHandler extends KernelErrorHandler {
                 (new static())->respJson(null, StatusCode::EXCEPTION, __(Utterance::SERVER_ERROR));
             }
             static::renderException($ex);
+            AccessLog::record();
         } catch (\Throwable $e) {
             static::record($e);
         }
+
     }
 
     /**
@@ -47,7 +49,6 @@ class ErrorHandler extends KernelErrorHandler {
             $ex->render();
         }
     }
-
 
     /**
      * @inheritDoc

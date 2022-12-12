@@ -32,18 +32,17 @@ class Controller extends KernelController {
                 case 'POST':
                     $params = $this->request()->post();
                     break;
-                case 'INPUT':
-                    $params = $this->request()->input();
-                    break;
                 default:
                     return NULL;
             }
         }
 
+        Log::channel('validate')->info('request validate', $params);
+
         $validator = Validator::make($params, $rules);
         $validator->validate();
         if ($throw && $validator->fails()) {
-            Log::channel()->warning('validate failed', $validator->errors());
+            Log::channel('validate')->warning('validate failed', $validator->errors());
             throw new ValidateException($validator->errors(), StatusCode::FAILED, __(Utterance::REQUEST_FAILED));
         }
         return $validator;

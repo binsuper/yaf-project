@@ -4,6 +4,7 @@ return [
 
     // 中间件
     'middlewares' => [
+        'access'  => \App\Common\Middleware\AccessLog::class,
         'example' => \App\Middleware\VerifySignExample::class
     ],
 
