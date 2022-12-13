@@ -26,6 +26,17 @@ return [
             },
         ],
 
+        'validate' => [
+            'driver'   => 'daily',
+            'path'     => storage_path('logs/app.log'),
+            'level'    => env('logger.validate.level', 'info'),
+            'days'     => 15,
+            'callback' => function ($h) {
+                $h->setFormatter(new LineFormatter('[%datetime%] %channel%.%level_name%: [PID.' . getmypid() . '] %message% %context% %extra%' . PHP_EOL));
+                $h->getFormatter()->allowInlineLineBreaks(true);
+            },
+        ],
+
         'access' => [
             'driver'   => 'daily',
             'path'     => storage_path('logs/access/access.log'),
