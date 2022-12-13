@@ -13,7 +13,7 @@ class AccessLog extends AbstractMiddleware {
      * @inheritDoc
      */
     public function handler(Request $request, Closure $next) {
-        Log::channel('access')->info('[' . getmypid() . '.request]', [
+        Log::channel('access')->info('[request]', [
             'uri'    => $request->getRequestPath(),
             'ip'     => $request->getClientIps(),
             'query'  => $request->query(),
@@ -29,7 +29,7 @@ class AccessLog extends AbstractMiddleware {
      * @inheritDoc
      */
     public function shutdown(Request $request, Closure $next) {
-        Log::channel('access')->info('[' . getmypid() . '.response] ' . $this->response()->getBody(), ['code' => $this->response()->getCode()]);
+        Log::channel('access')->info('[response]' . $this->response()->getBody(), ['code' => $this->response()->getCode()]);
 
         $next();
     }
@@ -40,7 +40,7 @@ class AccessLog extends AbstractMiddleware {
      * @throws \Gino\Phplib\Error\BadConfigurationException
      */
     public static function record() {
-        Log::channel('access')->info('[' . getmypid() . '.response] ' . App::response()->getBody(), ['code' => App::response()->getCode()]);
+        Log::channel('access')->info('[response] ' . App::response()->getBody(), ['code' => App::response()->getCode()]);
     }
 
 }

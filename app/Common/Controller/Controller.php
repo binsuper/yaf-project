@@ -21,9 +21,9 @@ class Controller extends KernelController {
      * @param array|null $params
      * @param bool $throw
      * @return Validator|null
-     * @throws ValidateException
+     * @throws ValidateException|\Gino\Phplib\Error\BadConfigurationException
      */
-    public function validate(array $rules = [], ?array $params = null, bool $throw = true) {
+    public function validate(array $rules = [], ?array $params = null, bool $throw = true): ?Validator {
         if (!$params) {
             switch ($this->request()->getMethod()) {
                 case 'GET':
@@ -37,12 +37,12 @@ class Controller extends KernelController {
             }
         }
 
-        Log::channel('validate')->info('request validate', $params);
+        Log::channel()->info('request validate, path: ' . $this->request()->getRequestPath(), $params);
 
         $validator = Validator::make($params, $rules);
         $validator->validate();
         if ($throw && $validator->fails()) {
-            Log::channel('validate')->warning('validate failed', $validator->errors());
+            Log::channel()->warning('validate failed', $validator->errors());
             throw new ValidateException($validator->errors(), StatusCode::FAILED, __(Utterance::REQUEST_FAILED));
         }
         return $validator;
